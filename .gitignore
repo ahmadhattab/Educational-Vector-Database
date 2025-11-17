@@ -1,0 +1,3 @@
+.venv
+src/edu_vector_db.egg-info
+src/vectordb/__pycache__
