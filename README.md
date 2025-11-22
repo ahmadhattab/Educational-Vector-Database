@@ -1,177 +1,215 @@
-# 🧠 قاعدة بيانات متجهات تعليمية (Educational Vector Database)
+# 📘 **قاعدة بيانات المتجهات التعليمية – الإصدار الثاني (v2)**
 
-مرحبًا بكم في مشروع **قاعدة المتجهات التعليمية** - مشروع مبسّط ومكتوب بلغة بايثون يهدف إلى شرح فكرة **Vector Databases** بطريقة واضحة وسهلة القراءة، بعيدًا عن التعقيد الموجود في الأنظمة الإنتاجية مثل Pinecone أو Milvus أو FAISS أو Chroma.
+> مشروع مفتوح المصدر يهدف لتعليم بناء وفهم **Vector Databases** خطوة بخطوة، وبطريقة بسيطة وواضحة باللغة العربية، بعيدًا عن تعقيد المكتبات الجاهزة.
 
-> 🎯 الهدف من المشروع هو **التعليم والفهم الداخلي** لكيفية عمل قواعد المتجهات وليس المنافسة مع أنظمة الإنتاج.
-
----
-
-## 🚀 ما هي قاعدة المتجهات؟
-
-قاعدة المتجهات هي نظام يقوم بتخزين متجهات (Vectors) تمثل:
-
-- نصوص  
-- صور  
-- جمل  
-- منتجات  
-- مستخدمين  
-
-ثم البحث عن أقرب المتجهات باستخدام خوارزميات مثل:
-
-- **Cosine Similarity**
-- **Dot Product**
-- **Euclidean Distance**
-
-هذه التقنية تُستخدم اليوم في:
-
-- أنظمة البحث الدلالي (Semantic Search)
-- الذكاء الاصطناعي التوليدي
-- RAG (Retrieval-Augmented Generation)
-- توصية المحتوى (Recommendations)
-- فهرسة النصوص
-
-وهذا المشروع يشرح كل ذلك بشكل مبسّط.
+هذا المشروع ليس بديلًا لأنظمة الإنتاج مثل Pinecone أو Milvus أو FAISS أو Chroma،
+بل هدفه **تقديم مصدر عربي تطبيقي** يساعدك تفهم الأساسيات من الداخل.
 
 ---
 
-## 🧩 لماذا هذا المشروع؟
+# 🚀 **ما الجديد في الإصدار الثاني (v2)؟**
 
-لأن معظم قواعد المتجهات الحديثة:
+الإصدار الثاني قدم تطويرات كبيرة، وانتقل من مستوى "الفهم النظري" إلى **التعليم التطبيقي** الفعلي:
 
-- معقدة جدًا  
-- غير مناسبة للطلاب أو المبتدئين  
-- تحتوي آلاف الأسطر من الكود  
-- مبنية لأغراض الإنتاج وليس التعليم  
+### ✨ 1) التخزين على القرص (Save / Load)
 
-بينما هذا المشروع:
-
-✔️ بسيط ومقروء  
-✔️ مناسب للدراسة والتجارب  
-✔️ يحتوي على مثال واضح  
-✔️ قابل للتطوير خطوة بخطوة  
-✔️ يساعدك تفهم "كيف يعمل Vector DB من الداخل"
+إمكانية حفظ قاعدة البيانات كاملة، واسترجاعها لاحقًا بدون إعادة البناء.
 
 ---
 
-## 🏗️ هيكل المشروع
+### ✨ 2) واجهة REST API باستخدام FastAPI
 
-```text
-src/
-  vectordb/
-    api.py          # الواجهة الرئيسية لقاعدة المتجهات
-    storage.py      # تخزين المتجهات والـ metadata داخل الذاكرة
-    index.py        # حساب Cosine Similarity
-    embeddings.py   # واجهة Embeddings + نموذج تجريبي DummyEmbeddings
+الآن يمكنك:
+
+* إضافة نصوص عن طريق HTTP
+* إجراء عمليات البحث
+* دمج المشروع مع أي Web App أو Chatbot
+* استخدامه كنواة بسيطة لأي RAG Pipeline
+
+---
+
+### ✨ 3) دعم مسافات بحث متعددة
+
+إضافة ٣ طرق لحساب التشابه:
+
+* **Cosine Similarity**
+* **Dot Product**
+* **Euclidean Distance** (محولة إلى قيمة تشابه)
+
+كل مسافة بتعطي نتائج مختلفة وبتفتح المجال للتجربة والتعلم.
+
+---
+
+### ✨ 4) دعم Embeddings حقيقية من HuggingFace
+
+بالإضافة للـ Dummy Embeddings التعليمية، أصبح بإمكانك استخدام نماذج:
+
+```
+sentence-transformers/all-MiniLM-L6-v2
+```
+
+للحصول على متجهات دقيقة كما في التطبيقات الواقعية.
+
+---
+
+# 🧠 **هدف المشروع**
+
+هذا المشروع هدفه تزويد المجتمع العربي بمصدر عملي لفهم:
+
+* كيف تُخزن المتجهات
+* كيف نحسب التشابه
+* كيف نبحث عن أقرب الجيران
+* كيف نستخدم Embeddings داخل النظام
+* كيف تبنى Vector Databases من الصفر
+
+كل ذلك بدون تعقيد… وبكود واضح وسهل القراءة.
+
+---
+
+# 🏗️ **هيكل المشروع**
+
+```
+data/
+  vectordb.pkl          ← مثال لملف قاعدة بيانات محفوظة
 examples/
   basic_text_search.py
+src/
+  vectordb/
+    api.py              ← المنطق الأساسي للقاعدة
+    storage.py          ← التخزين داخل الذاكرة + التحميل/الحفظ
+    index.py            ← مسافات التشابه
+    embeddings.py       ← Embeddings Dummy + حقيقية
+tests/
+  test_basic.py         ← اختبارات الإصدار الأول
+  test_v2_features.py   ← اختبارات v2 (save/load – metrics – API helpers)
+server.py               ← واجهة REST API باستخدام FastAPI
 requirements.txt
-README.md
 setup.cfg
 pyproject.toml
+README.md
 ```
 
 ---
 
-## 🔧 التثبيت والتشغيل
+# 🔧 **التثبيت والتشغيل**
 
-### 1️⃣ تثبيت المتطلبات
+## 1) تثبيت المتطلبات
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2️⃣ تثبيت المشروع كمكتبة محلية (وضع التطوير)
-
-من داخل مجلد المشروع (الذي يحتوي `setup.cfg` و `pyproject.toml`):
+## 2) تثبيت المشروع كمكتبة محلية
 
 ```bash
 pip install -e .
 ```
 
-### 3️⃣ تشغيل المثال الجاهز
-
-```bash
-python examples/basic_text_search.py
-```
-
 ---
 
-## 🧪 مثال مبسّط
+# 🧪 **مثال سريع للبحث بالنص**
 
 ```python
-from vectordb import VectorDB, DummyEmbeddings
+from vectordb import VectorDB
+from vectordb.embeddings import HFSentenceTransformerEmbeddings
 
-dim = 16
-embed = DummyEmbeddings(dim)
-db = VectorDB(dim, embeddings=embed)
+emb = HFSentenceTransformerEmbeddings()
+db = VectorDB(dim=emb.embed("test").shape[0], embeddings=emb, metric="cosine")
 
-db.add_text("I love machine learning")
-db.add_text("Neural networks learn patterns")
-db.add_text("Football is my hobby")
+db.add_text("أنا أحب تعلم الآلة")
+db.add_text("الشبكات العصبية تتعلم الأنماط")
 
-results = db.search_text("deep learning", k=2)
+results = db.search_text("تعلم عميق", k=2)
 
-for r in results:
-    print(r["score"], r["metadata"].get("text"))
+print(results)
 ```
 
 ---
 
-## 🧠 كيف يعمل البحث؟
+# 💾 **الحفظ والتحميل**
 
-1. تحويل النص إلى متجه باستخدام Embeddings  
-2. جلب جميع المتجهات المخزنة من InMemoryStorage  
-3. تطبيع المتجهات (Normalization)  
-4. حساب Cosine Similarity بين الاستعلام وباقي المتجهات  
-5. ترتيب النتائج من الأعلى إلى الأقل  
-6. إرجاع أفضل K نتائج مع `id` و `score` و `metadata`
+## حفظ قاعدة البيانات:
 
----
+```python
+db.save("my_db.pkl")
+```
 
-## 📌 الخصائص المتوفرة في الإصدار الأول (v1)
+## تحميل قاعدة البيانات:
 
-| الخاصية | متوفرة؟ |
-|---------|---------|
-| تخزين في الذاكرة In-Memory | ✔️ |
-| Cosine Similarity | ✔️ |
-| دعم metadata | ✔️ |
-| البحث عن أقرب K نتائج | ✔️ |
-| Embeddings تجريبية (Dummy) | ✔️ |
-| مثال جاهز | ✔️ |
-| قابلية التوسع | ✔️ |
+```python
+db2 = VectorDB.load("my_db.pkl", embeddings=emb)
+```
 
 ---
 
-## 🛣️ خارطة الطريق (Roadmap)
+# 🌐 **تشغيل واجهة REST API**
 
-### 🚀 الإصدار الثاني (v2)
-- التخزين على القرص (save/load)
-- واجهة REST باستخدام FastAPI
-- دعم مسافات أخرى (Euclidean, Dot Product)
-- دعم نماذج Embeddings حقيقية
+```bash
+uvicorn server:app --reload
+```
 
-### 🚀 الإصدار الثالث (v3)
-- لوحة تحكم بسيطة لعرض النتائج
-- RAG pipeline مبسّط
-- Indexing أسرع (ANN مثل HNSW)
+ثم افتح:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+### مثال طلب:
+
+#### إضافة نص:
+
+```
+POST /add_text
+{
+  "text": "الذكاء الاصطناعي يتطور بسرعة",
+  "metadata": {"source": "demo"}
+}
+```
+
+#### بحث:
+
+```
+POST /search
+{
+  "query": "تعلم الآلة",
+  "k": 3
+}
+```
 
 ---
 
-## 💡 لمن هذا المشروع؟
+# 📌 **مميزات الإصدار الثاني باختصار**
 
-هذا المشروع مناسب لـ:
-
-- الطلاب
-- الجامعات
-- معلمي الذكاء الاصطناعي
-- مطوري NLP و ML
-- الباحثين في RAG
-- الهواة الذين يريدون بناء Vector DB بأنفسهم
+| الميزة             | الحالة |
+| ------------------ | ------ |
+| تخزين داخل الذاكرة | ✔️     |
+| التخزين على القرص  | ✔️     |
+| REST API           | ✔️     |
+| Cosine Similarity  | ✔️     |
+| Dot Product        | ✔️     |
+| Euclidean          | ✔️     |
+| Dummy Embeddings   | ✔️     |
+| Embeddings حقيقية  | ✔️     |
+| قابل للتطوير       | ✔️     |
 
 ---
 
-## 📜 الرخصة
+# 🤝 **المساهمة**
 
-المشروع مرخص تحت:  
-**MIT License**
+المشروع مفتوح للجميع:
 
+* تحسينات
+* ميزات جديدة
+* أمثلة
+* ترجمة
+* Fixes
+
+نرحب بأي Pull Request أو Issue.
+
+---
+
+# 📜 **الرخصة**
+
+MIT License
+
+---
