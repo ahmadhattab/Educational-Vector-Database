@@ -69,15 +69,20 @@ sentence-transformers/all-MiniLM-L6-v2
 # 🏗️ **هيكل المشروع**
 
 ```
+data/
+  vectordb.pkl          ← مثال لملف قاعدة بيانات محفوظة
+examples/
+  basic_text_search.py
 src/
   vectordb/
     api.py              ← المنطق الأساسي للقاعدة
     storage.py          ← التخزين داخل الذاكرة + التحميل/الحفظ
     index.py            ← مسافات التشابه
     embeddings.py       ← Embeddings Dummy + حقيقية
-examples/
-  basic_text_search.py
-server.py              ← واجهة REST API باستخدام FastAPI
+tests/
+  test_basic.py         ← اختبارات الإصدار الأول
+  test_v2_features.py   ← اختبارات v2 (save/load – metrics – API helpers)
+server.py               ← واجهة REST API باستخدام FastAPI
 requirements.txt
 setup.cfg
 pyproject.toml
